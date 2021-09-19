@@ -1,4 +1,4 @@
-package com.holy.ws.entity.concret.user;
+package com.holy.ws.entities.concret.user;
 
 
 import lombok.AllArgsConstructor;
