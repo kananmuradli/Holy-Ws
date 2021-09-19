@@ -16,8 +16,8 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<hibernate>6.0.0.Alpha8</hibernate>
-		<swagger>2.9.2</swagger>
+		<hibernate.version>6.0.0.Alpha8</hibernate.version>
+		<swagger.version>2.9.2</swagger.version>
 	</properties>
 
 	<dependencies>
@@ -75,18 +75,18 @@
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${swagger}</version>
+			<version>${swagger.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<version>${swagger}</version>
+			<version>${swagger.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
 		<dependency>
 			<groupId>org.hibernate.orm</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>${hibernate}</version>
+			<version>${hibernate.version}</version>
 		</dependency>
 
 	</dependencies>
