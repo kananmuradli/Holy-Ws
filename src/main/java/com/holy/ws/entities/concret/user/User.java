@@ -3,9 +3,9 @@ package com.holy.ws.entities.concret.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.Objects;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Entity
 @Table(name = "Users")
@@ -15,41 +15,44 @@ import java.util.Objects;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "User_Id")
+    @Column(name = "User_Id",nullable = false,updatable = false)
     private int id;
 
-    @Column(name = "User_Name")
+    @Column(name = "User_Name",length = 30,updatable = false)
+    @NotNull(message = "Field may not be null")
     private String name;
 
-    @Column(name = "User_LastName")
+    @Column(name = "User_LastName",length = 50,updatable = false)
+    @NotNull(message = "Field may not be null")
     private String lastName;
 
-    @Column(name = "User_Username")
+    @Column(name = "User_Username",length = 20)
+    @NotNull(message = "Field may not be null")
     private String username;
+
+    @Column(name = "User_BirthOfDate",updatable = false)
+    @NotNull(message = "Field may not be null")
+    @Temporal(TemporalType.DATE)
+    private Date birthOfDate;
 
     @JoinColumn(name = "User_AddressId",referencedColumnName = "id")
     @OneToOne
     private Address address;
 
-    @Column(name = "User_Email")
+    @Column(name = "User_Email",length = 40)
+    @NotNull(message = "Field may not be null")
     private String email;
 
-    @Column(name = "User_PhoneNumber")
+    @Column(name = "User_PhoneNumber",length = 14)
+    @NotNull(message = "Field may not be null")
     private String phoneNumber;
 
-    @Column(name = "User_FaxNumber")
+    @Column(name = "User_FaxNumber",length = 20)
     private String faxNumber;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return getId() == user.getId() && Objects.equals(getName(), user.getName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getAddress(), user.getAddress()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPhoneNumber(), user.getPhoneNumber()) && Objects.equals(getFaxNumber(), user.getFaxNumber());
-    }
+    @Column(name = "User_About")
+    @Lob
+    private String about;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getName(), getLastName(), getUsername(), getAddress(), getEmail(), getPhoneNumber(), getFaxNumber());
-    }
+
 }
