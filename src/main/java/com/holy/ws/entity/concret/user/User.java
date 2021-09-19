@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Users")
@@ -26,9 +27,9 @@ public class User {
     @Column(name = "User_Username")
     private String username;
 
-    @Column(name = "User_AddressId")
-    @OneToOne(mappedBy = "Address_Id")
-    private Address addressId;
+    @JoinColumn(name = "User_AddressId",referencedColumnName = "id")
+    @OneToOne
+    private Address address;
 
     @Column(name = "User_Email")
     private String email;
@@ -39,4 +40,16 @@ public class User {
     @Column(name = "User_FaxNumber")
     private String faxNumber;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getId() == user.getId() && Objects.equals(getName(), user.getName()) && Objects.equals(getLastName(), user.getLastName()) && Objects.equals(getUsername(), user.getUsername()) && Objects.equals(getAddress(), user.getAddress()) && Objects.equals(getEmail(), user.getEmail()) && Objects.equals(getPhoneNumber(), user.getPhoneNumber()) && Objects.equals(getFaxNumber(), user.getFaxNumber());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getLastName(), getUsername(), getAddress(), getEmail(), getPhoneNumber(), getFaxNumber());
+    }
 }

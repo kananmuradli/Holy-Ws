@@ -16,11 +16,11 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Address_Id")
+    @Column(name = "Id")
     private long id;
 
-    @Column(name = "Address_UserId")
-    private int userId;
+    @OneToOne(mappedBy = "address")
+    private User userId;
 
     @Column(name = "Address_Country")
     private String country;
