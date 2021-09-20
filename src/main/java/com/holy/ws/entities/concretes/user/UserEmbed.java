@@ -1,6 +1,8 @@
 package com.holy.ws.entities.concretes.user;
 
 
+import com.holy.ws.entities.concretes.pages.PagesOfUsers;
+import com.holy.ws.entities.concretes.post.UserPost;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

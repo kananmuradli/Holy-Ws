@@ -1,5 +1,7 @@
-package com.holy.ws.entities.concretes.user;
+package com.holy.ws.entities.concretes.post;
 
+
+import com.holy.ws.entities.concretes.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
