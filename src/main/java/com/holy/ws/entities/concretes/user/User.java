@@ -3,14 +3,17 @@ package com.holy.ws.entities.concretes.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -53,13 +56,15 @@ public class User {
     @OneToOne
     private Address address;
 
-    @Column(name = "User_Email",length = 40)
-    @NotNull
-    private String email;
+    @Column(name = "User_Email")
+    @Length(min = 1,max = 3)
+    @ElementCollection
+    private Set<String> email;
 
     @Column(name = "User_PhoneNumber",length = 14)
-    @NotNull
-    private String phoneNumber;
+    @Length(min = 1,max = 2)
+    @ElementCollection
+    private Set<String> phoneNumber;
 
 
     @Embedded
