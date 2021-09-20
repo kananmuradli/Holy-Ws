@@ -4,16 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -57,7 +53,13 @@ public class User {
 
     @ElementCollection
     @CollectionTable(name = "User_Addresses", joinColumns = @JoinColumn(name = "userId"))
-    private Set<Address> address;
+    @AttributeOverrides({
+            @AttributeOverride(name = "country",column = @Column(name = "Address_Country")),
+            @AttributeOverride(name = "city",column = @Column(name = "Address_City")),
+            @AttributeOverride(name = "street",column = @Column(name = "Address_Street")),
+            @AttributeOverride(name = "postalCode",column = @Column(name = "Address_PostalCode"))
+    })
+    private Set<AddressEmbed> addressEmbeds;
 
     @Column(name = "User_Email")
     @Length(min = 1,max = 3)

@@ -19,7 +19,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserEmbed {
+class UserEmbed {
 
     @Nullable
     @Lob
