@@ -1,4 +1,4 @@
-package com.holy.ws.entities.concret.user;
+package com.holy.ws.entities.concretes;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "User_Id",nullable = false,updatable = false)
-    private int id;
+    private int userId;
 
     @Column(name = "User_Name",length = 30,updatable = false)
     @NotNull(message = "Field may not be null")
@@ -72,5 +72,9 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY)
     private List<PagesOfUsers> pagesOfUsers;
 
+
+    @Column(name = "User_Post")
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<UserPost> posts;
 
 }
