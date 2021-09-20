@@ -49,7 +49,7 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date birthOfDate;
 
-    @JoinColumn(name = "User_AddressId",referencedColumnName = "id")
+    @JoinColumn(name = "userId")
     @OneToOne
     private Address address;
 
