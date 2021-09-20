@@ -16,11 +16,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Entity
-@Table(name = "Users")
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "Users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,20 +54,21 @@ public class User {
     @Temporal(TemporalType.DATE)
     private Date birthOfDate;
 
-    @JoinColumn(name = "userId")
-    @OneToOne
-    private Address address;
+
+    @ElementCollection
+    @CollectionTable(name = "User_Addresses", joinColumns = @JoinColumn(name = "userId"))
+    private Set<Address> address;
 
     @Column(name = "User_Email")
     @Length(min = 1,max = 3)
     @ElementCollection
-    private HashSet<String> email;
+    private Set<String> email;
 
     @Column(name = "PhoneNumber",length = 14)
     @Length(min = 1,max = 2)
     @ElementCollection
     @CollectionTable(name = "User_PhoneNumbers",joinColumns = @JoinColumn(name = "User_Id"))
-    private HashSet<String> phoneNumber;
+    private Set<String> phoneNumber;
 
 
     @Embedded

@@ -6,22 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "Address")
+@Embeddable
 public class Address {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
+    @Column(name = "Address_Id")
     private long id;
-
-    @OneToOne(mappedBy = "address")
-    private User userId;
 
     @Column(name = "Address_Country")
     private String country;
@@ -35,4 +30,17 @@ public class Address {
     @Column(name = "Address_postalCode")
     private String postalCode;
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address)) return false;
+        Address address = (Address) o;
+        return getId() == address.getId() && Objects.equals(getCountry(), address.getCountry()) && Objects.equals(getCity(), address.getCity()) && Objects.equals(getStreet(), address.getStreet()) && Objects.equals(getPostalCode(), address.getPostalCode());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getCountry(), getCity(), getStreet(), getPostalCode());
+    }
 }
