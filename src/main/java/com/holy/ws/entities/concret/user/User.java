@@ -3,11 +3,14 @@ package com.holy.ws.entities.concret.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -58,12 +61,16 @@ public class User {
     @NotNull(message = "Field may not be null")
     private String phoneNumber;
 
-    @Column(name = "User_FaxNumber",length = 20)
-    private String faxNumber;
-
     @Column(name = "User_About")
+    @Nullable
     @Lob
     private String about;
+
+    @Column(name = "User_Pages")
+    @Nullable
+    @JoinColumn(name = "User_PagesId",referencedColumnName = "")
+    @OneToMany
+    private List<PagesOfUsers> pagesOfUsers;
 
 
 }

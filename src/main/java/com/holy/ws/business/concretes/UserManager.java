@@ -1,11 +1,12 @@
 package com.holy.ws.business.concretes;
 
+import com.holy.ws.business.abstracts.UserService;
 import com.holy.ws.dataAccess.abstracts.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserManager {
+public class UserManager implements UserService {
 
 
     private final UserRepository userRepository;
@@ -14,4 +15,7 @@ public class UserManager {
     public UserManager(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+
+
 }
