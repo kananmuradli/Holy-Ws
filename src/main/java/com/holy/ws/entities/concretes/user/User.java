@@ -63,6 +63,9 @@ public class User {
 
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "about",column = @Column(name = "User_About"))
+    })
     private UserEmbed userEmbed;
 
 

@@ -9,6 +9,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Embeddable
 @Getter
@@ -17,19 +18,16 @@ import java.util.List;
 @AllArgsConstructor
 public class UserEmbed {
 
-    @Column(name = "User_About")
     @Nullable
     @Lob
     private String about;
 
-    @Column(name = "User_Pages")
-    @Nullable
     @JoinColumn(name = "owner")
     @OneToMany(fetch = FetchType.LAZY)
-    private List<PagesOfUsers> pagesOfUsers;
+    private Set<PagesOfUsers> pagesOfUsers;
 
 
-    @Column(name = "User_Post")
+
     @OneToMany(fetch = FetchType.LAZY)
     private List<UserPost> posts;
 
