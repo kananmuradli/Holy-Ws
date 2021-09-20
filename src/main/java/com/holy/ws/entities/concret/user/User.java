@@ -38,6 +38,9 @@ public class User {
     @NotEmpty
     private String password;
 
+    @Column(name = "User_ProfilAvatar")
+    private String avatar;
+
     @Column(name = "User_BirthOfDate",updatable = false)
     @NotNull(message = "Field may not be null")
     @Temporal(TemporalType.DATE)
