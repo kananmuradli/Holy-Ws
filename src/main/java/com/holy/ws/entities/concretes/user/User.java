@@ -77,8 +77,5 @@ public class User {
     @OneToMany(fetch = FetchType.LAZY)
     private List<UserPost> posts;
 
-//    @Column(name = "User_Followers")
-//    @OneToOne
-//    private Followed followed;
 
 }
