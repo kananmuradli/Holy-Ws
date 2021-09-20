@@ -2,6 +2,8 @@ package com.holy.ws.entities.concretes;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "User_Posts")
@@ -10,7 +12,22 @@ public class UserPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long postId;
 
-    @JoinColumn(name = "")
-    @OneToOne
-    private PostContex postContex;
+    @ManyToOne
+    @NotNull
+    private User userOfPost;
+
+    @Column(name = "twit")
+    @NotNull
+    private String twit;
+
+    @Column(name = "tags")
+    @OneToMany
+    private List<User> tags;
+
+    /**
+     * Burada sekillerde olmalidir
+     */
+
+    @Column(name = "sound")
+    private String sound;
 }
