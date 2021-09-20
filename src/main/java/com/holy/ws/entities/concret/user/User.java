@@ -68,8 +68,8 @@ public class User {
 
     @Column(name = "User_Pages")
     @Nullable
-    @JoinColumn(name = "User_PagesId",referencedColumnName = "")
-    @OneToMany
+    @JoinColumn(name = "owner")
+    @OneToMany(fetch = FetchType.LAZY)
     private List<PagesOfUsers> pagesOfUsers;
 
 

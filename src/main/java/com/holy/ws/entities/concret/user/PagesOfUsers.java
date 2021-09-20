@@ -1,9 +1,6 @@
 package com.holy.ws.entities.concret.user;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -12,8 +9,10 @@ public class PagesOfUsers {
     @Id
     private long pageId;
 
-    @OneToMany(mappedBy = "pagesOfUsers")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "User_Id")
     private User owner;
+
     private String pageName;
     private String pageAvatar;
     private String pageCoverImage;
