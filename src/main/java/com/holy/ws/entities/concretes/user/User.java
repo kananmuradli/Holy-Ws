@@ -12,6 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -59,12 +60,13 @@ public class User {
     @Column(name = "User_Email")
     @Length(min = 1,max = 3)
     @ElementCollection
-    private Set<String> email;
+    private HashSet<String> email;
 
-    @Column(name = "User_PhoneNumber",length = 14)
+    @Column(name = "PhoneNumber",length = 14)
     @Length(min = 1,max = 2)
     @ElementCollection
-    private Set<String> phoneNumber;
+    @CollectionTable(name = "User_PhoneNumbers",joinColumns = @JoinColumn(name = "User_Id"))
+    private HashSet<String> phoneNumber;
 
 
     @Embedded
