@@ -45,7 +45,7 @@ public class User {
     private String avatar;
 
     @Column(name = "User_BirthOfDate",updatable = false)
-    @NotNull(message = "Field may not be null")
+    @NotNull
     @Temporal(TemporalType.DATE)
     private Date birthOfDate;
 
@@ -54,28 +54,16 @@ public class User {
     private Address address;
 
     @Column(name = "User_Email",length = 40)
-    @NotNull(message = "Field may not be null")
+    @NotNull
     private String email;
 
     @Column(name = "User_PhoneNumber",length = 14)
-    @NotNull(message = "Field may not be null")
+    @NotNull
     private String phoneNumber;
 
-    @Column(name = "User_About")
-    @Nullable
-    @Lob
-    private String about;
 
-    @Column(name = "User_Pages")
-    @Nullable
-    @JoinColumn(name = "owner")
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<PagesOfUsers> pagesOfUsers;
-
-
-    @Column(name = "User_Post")
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<UserPost> posts;
+    @Embedded
+    private UserEmbed userEmbed;
 
 
 }
