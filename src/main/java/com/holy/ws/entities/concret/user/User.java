@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -29,6 +31,12 @@ public class User {
     @Column(name = "User_Username",length = 20)
     @NotNull(message = "Field may not be null")
     private String username;
+
+    @Column(name = "password")
+    @Size(min = 6)
+    @NotNull
+    @NotEmpty
+    private String password;
 
     @Column(name = "User_BirthOfDate",updatable = false)
     @NotNull(message = "Field may not be null")
