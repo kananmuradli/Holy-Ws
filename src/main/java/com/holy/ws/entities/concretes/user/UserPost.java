@@ -1,4 +1,4 @@
-package com.holy.ws.entities.concretes;
+package com.holy.ws.entities.concretes.user;
 
 
 import javax.persistence.*;
@@ -30,4 +30,6 @@ public class UserPost {
 
     @Column(name = "sound")
     private String sound;
+
+
 }

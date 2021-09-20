@@ -1,6 +1,6 @@
 package com.holy.ws.dataAccess.abstracts;
 
-import com.holy.ws.entities.concretes.User;
+import com.holy.ws.entities.concretes.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

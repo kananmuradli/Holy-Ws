@@ -1,4 +1,4 @@
-package com.holy.ws.entities.concretes;
+package com.holy.ws.entities.concretes.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -76,5 +76,9 @@ public class User {
     @Column(name = "User_Post")
     @OneToMany(fetch = FetchType.LAZY)
     private List<UserPost> posts;
+
+//    @Column(name = "User_Followers")
+//    @OneToOne
+//    private Followed followed;
 
 }
