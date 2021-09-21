@@ -5,40 +5,52 @@ import com.holy.ws.entities.concretes.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "User_Posts")
+@Table(name = "C_POSTS")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long postId;
 
-    @ManyToOne
+    @Column(name = "AUTHOR")
     @NotNull
-    @Column(name = "Author")
-    private User author;
+    private User authorId;
 
-    @Column(name = "ContextText")
+    @Column(name = "CONTEXT_TEXT")
     @NotNull
     private String contextText;
 
-    @Column(name = "Tags")
-    @OneToMany
-    private List<User> tags;
+    @Column(name = "TAGS")
+    @ElementCollection
+    @CollectionTable(name = "TAGS",joinColumns = @JoinColumn(name = "postId"))
+    private Set<User> tags;
 
 
-    @Column(name = "SoundsFile")
+    @Column(name = "SOUND_FIELD")
     private String sound;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "COMMENTS", joinColumns = { @JoinColumn(name = "postId") }, inverseJoinColumns = { @JoinColumn(name = "commentId") })
-    private List<Comment> comments = new LinkedList<>();
+    @ElementCollection
+    @CollectionTable(name = "COMMENTS",joinColumns = @JoinColumn(name = "postId"))
+    @Column(name = "COMMENTS")
+    private List<Comment> comments;
+
+    @Column(name = "COUNT_COMMENTS")
+    private int countComments = getCount(comments);
+
+    private int getCount(List<Comment> list){
+        if(!(list==null)) return list.size();
+        else return 0;
+    }
 
     @Embedded
     @AttributeOverrides({

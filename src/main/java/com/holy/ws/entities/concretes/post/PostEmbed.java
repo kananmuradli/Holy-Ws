@@ -5,12 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embeddable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,10 +15,16 @@ import java.util.Set;
 @Embeddable
 public class PostEmbed {
 
-    @ManyToMany(mappedBy = "userId")
+
+    @ElementCollection
+    @CollectionTable(name = "LIKED_POST_USER",joinColumns = @JoinColumn(name = "postId"))
     private Set<User> likedPostUserList;
 
-    private Date commentCreateDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date commentCreateDate = new Date();
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date commentUpdateDate;
+
     private boolean isUpdate = false;
 }

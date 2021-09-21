@@ -1,5 +1,7 @@
 package com.holy.ws.entities.concretes.user;
 
+import com.holy.ws.entities.concretes.user.other.Address;
+import com.holy.ws.entities.concretes.user.other.PhoneNumberSort;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -36,7 +38,7 @@ public class User {
     private String username;
 
     @Column(name = "password")
-    @Size(min = 6)
+    @Length(min = 6)
     @NotNull
     @NotEmpty
     private String password;
@@ -51,6 +53,7 @@ public class User {
 
 
     @ElementCollection
+    @Size(max = 2)
     @CollectionTable(name = "User_Addresses", joinColumns = @JoinColumn(name = "userId"))
     @AttributeOverrides({
             @AttributeOverride(name = "country",column = @Column(name = "Address_Country")),
@@ -58,18 +61,20 @@ public class User {
             @AttributeOverride(name = "street",column = @Column(name = "Address_Street")),
             @AttributeOverride(name = "postalCode",column = @Column(name = "Address_PostalCode"))
     })
-    private Set<AddressEmbed> addressEmbeds = new HashSet<>();
+    private Set<Address> addresses;
 
     @Column(name = "User_Email")
-    @Length(min = 1,max = 3)
+    @Size(min = 1,max = 3)
     @ElementCollection
-    private Set<String> emails = new HashSet<>();
+    @CollectionTable(name = "EMAILS",joinColumns = @JoinColumn(name = "User_ID"))
+    private Set<String> emails;
 
     @Column(name = "PhoneNumber",length = 14)
-    @Length(min = 1,max = 2)
+    @Size(min = 1,max = 2)
     @ElementCollection
+    @MapKeyColumn(name = "SORT_NUMBER")
     @CollectionTable(name = "User_PhoneNumbers",joinColumns = @JoinColumn(name = "User_Id"))
-    private Set<String> phoneNumbers = new HashSet<>();
+    private Map<PhoneNumberSort,String> phoneNumbers;
 
 
     @Embedded

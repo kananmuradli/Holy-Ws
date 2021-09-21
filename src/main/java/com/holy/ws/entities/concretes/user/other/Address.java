@@ -1,19 +1,17 @@
-package com.holy.ws.entities.concretes.user;
+package com.holy.ws.entities.concretes.user.other;
 
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.Objects;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Embeddable
-public class AddressEmbed {
+public class Address {
 
     private String country;
 
@@ -27,9 +25,9 @@ public class AddressEmbed {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AddressEmbed)) return false;
-        AddressEmbed addressEmbed = (AddressEmbed) o;
-        return  Objects.equals(getCountry(), addressEmbed.getCountry()) && Objects.equals(getCity(), addressEmbed.getCity()) && Objects.equals(getStreet(), addressEmbed.getStreet()) && Objects.equals(getPostalCode(), addressEmbed.getPostalCode());
+        if (!(o instanceof Address)) return false;
+        Address address = (Address) o;
+        return  Objects.equals(getCountry(), address.getCountry()) && Objects.equals(getCity(), address.getCity()) && Objects.equals(getStreet(), address.getStreet()) && Objects.equals(getPostalCode(), address.getPostalCode());
     }
 
     @Override
