@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embeddable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +19,7 @@ import java.util.Set;
 @Embeddable
 public class PostEmbed {
 
+    @ManyToMany(mappedBy = "userId")
     private Set<User> likedPostUserList;
 
     private Date commentCreateDate;

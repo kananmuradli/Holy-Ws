@@ -40,4 +40,9 @@ public class Post {
     @CollectionTable(name = "CommentsOfPost" , joinColumns = @JoinColumn(name = "postId"))
     private List<Comment> comments = new LinkedList<>();
 
+    @Embedded
+    @AttributeOverrides({
+    })
+    private PostEmbed postEmbed;
+
 }
