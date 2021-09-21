@@ -13,7 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-class AddressEmbed {
+public class AddressEmbed {
 
     private String country;
 

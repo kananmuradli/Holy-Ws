@@ -10,12 +10,11 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "Users")
 public class User {
@@ -59,18 +58,18 @@ public class User {
             @AttributeOverride(name = "street",column = @Column(name = "Address_Street")),
             @AttributeOverride(name = "postalCode",column = @Column(name = "Address_PostalCode"))
     })
-    private Set<AddressEmbed> addressEmbeds;
+    private Set<AddressEmbed> addressEmbeds = new HashSet<>();
 
     @Column(name = "User_Email")
     @Length(min = 1,max = 3)
     @ElementCollection
-    private Set<String> email;
+    private Set<String> emails = new HashSet<>();
 
     @Column(name = "PhoneNumber",length = 14)
     @Length(min = 1,max = 2)
     @ElementCollection
     @CollectionTable(name = "User_PhoneNumbers",joinColumns = @JoinColumn(name = "User_Id"))
-    private Set<String> phoneNumber;
+    private Set<String> phoneNumbers = new HashSet<>();
 
 
     @Embedded
