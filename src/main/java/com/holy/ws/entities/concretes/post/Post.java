@@ -36,8 +36,8 @@ public class Post {
     @Column(name = "SoundsFile")
     private String sound;
 
-    @ElementCollection
-    @CollectionTable(name = "CommentsOfPost" , joinColumns = @JoinColumn(name = "postId"))
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "COMMENTS", joinColumns = { @JoinColumn(name = "postId") }, inverseJoinColumns = { @JoinColumn(name = "commentId") })
     private List<Comment> comments = new LinkedList<>();
 
     @Embedded

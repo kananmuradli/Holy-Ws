@@ -7,21 +7,23 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "Comments")
+@Table(name = "COMMENTS")
 @Embeddable
 public class Comment {
     @Id
     private long commentId;
 
-    @ManyToOne
     @Column(name = "PostId")
-    private Post post;
+    @ManyToOne
+    private Post postId;
 
     @Lob
     private String commentContext;
 
+
+    @Column(name = "Author")
     @ManyToOne
-    private User commentAuthor;
+    private User commentAuthorId;
 
     @OneToMany
     private Set<User> likedCommentUserList;

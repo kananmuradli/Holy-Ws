@@ -2,6 +2,7 @@ package com.holy.ws.entities.concretes.user;
 
 
 import com.holy.ws.entities.concretes.pages.PagesOfUsers;
+import com.holy.ws.entities.concretes.post.Comment;
 import com.holy.ws.entities.concretes.post.Post;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
@@ -30,6 +31,10 @@ public class UserEmbed {
     @Nullable
     @OneToMany(fetch = FetchType.LAZY)
     private List<Post> posts;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "COMMENTS", joinColumns = { @JoinColumn(name = "commentAuthorId") }, inverseJoinColumns = { @JoinColumn(name = "commentId") })
+    private List<Comment> comments;
 
     @Nullable
     @ElementCollection
