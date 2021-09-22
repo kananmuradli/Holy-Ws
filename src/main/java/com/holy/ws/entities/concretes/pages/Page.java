@@ -20,36 +20,32 @@ import java.util.Set;
  * @author Vugar Mammadli
  */
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 @Entity
-@Table(name = "pageOfUsers")
+@Table(name = "PAGES")
 public class Page implements Occupant {
     @Id
     @Column(name = "PAGE_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long pageId;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "userId")
     private User owner;
 
-    @Column(name = "PAGE_NAME")
-    @NotNull
+    @Column(name = "PAGE_NAME",nullable = false)
     @Length(min = 5,max = 50)
     private String pageName;
 
-    @Column(name = "PAGE_AVATAR")
     @Lob
+    @Column(name = "PAGE_AVATAR")
     private String pageAvatar;
 
-    @Column(name = "PAGE_COVER_IMAGE")
     @Lob
+    @Column(name = "PAGE_COVER_IMAGE")
     private String pageCoverImage;
 
-    @Column(name = "PAGE_CREATE_DATE")
-    @NotNull
+    @Column(name = "PAGE_CREATE_DATE",nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 

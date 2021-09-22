@@ -34,5 +34,8 @@ public class Comment {
     @Column
     private boolean wasUpdateComment;
 
+    @ManyToOne
+    @JoinColumn(name = "postId")
+    private Post postOfComment;
 
 }

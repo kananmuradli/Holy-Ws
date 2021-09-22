@@ -20,8 +20,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int postId;
 
-    @Column(name = "CONTEXT_TEXT")
-    @NotNull
+    @Column(name = "CONTEXT_TEXT",nullable = false)
     private String contextText;
 
     @Column(name = "TAGS")
@@ -31,10 +30,7 @@ public class Post {
 
     @Column(name = "SOUND_FIELD")
     private String sound;
-
-
-
-
+    
     @Transient
     private int countComments = getCount(new ArrayList<>());
     private int getCount(List<Comment> list){

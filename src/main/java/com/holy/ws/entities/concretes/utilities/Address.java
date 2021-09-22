@@ -1,7 +1,6 @@
 package com.holy.ws.entities.concretes.utilities;
 
 
-import com.holy.ws.entities.abstracts.Occupant;
 import com.holy.ws.entities.concretes.pages.Page;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,9 +21,6 @@ public class Address implements Comparable<Address> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long addressId;
-
-    @Column(name = "OCCUPANT")
-    private Occupant occupant;
 
     @Column(name = "COUNTRY")
     private String country;

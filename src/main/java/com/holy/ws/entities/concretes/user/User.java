@@ -24,7 +24,7 @@ import java.util.Set;
 public class User implements Occupant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "User_Id",nullable = false,updatable = false)
+    @Column(name = "USER_ID",nullable = false,updatable = false)
     private int userId;
 
     @Column(name = "USER_NAME",length = 30,updatable = false)
@@ -35,7 +35,7 @@ public class User implements Occupant {
     @NotNull(message = "Field may not be null")
     private String lastName;
 
-    @Column(name = "USER_USERNAME",length = 20)
+    @Column(name = "USERNAME",length = 20)
     @NotNull(message = "Field may not be null")
     private String username;
 
@@ -45,10 +45,10 @@ public class User implements Occupant {
     @NotEmpty(message = "Must Not Empty")
     private String password;
 
-    @Column(name = "USER_PROFILAVATAR")
+    @Column(name = "USER_PROFIL_AVATAR")
     private String avatar;
 
-    @Column(name = "USER_BIRTDAY",updatable = false)
+    @Column(name = "USER_BIRTHDAY",updatable = false)
     @NotNull
     @Temporal(TemporalType.DATE)
     private Date birthOfDate;
@@ -74,13 +74,9 @@ public class User implements Occupant {
 
 
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "aboutUser",column = @Column(name = "User_About"))
-    })
     private UserEmbed userEmbed;
+    
 
-
-    @NotNull
     @Override
     public int compareTo(Occupant o) {
         return 0;

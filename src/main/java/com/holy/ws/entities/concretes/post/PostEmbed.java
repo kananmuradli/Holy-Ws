@@ -7,15 +7,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 /**
  * @author Vugar Mammadli
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 @Embeddable
 public class PostEmbed {
+
+    @OneToMany(mappedBy = "postOfComment")
+    private List<Comment> comments;
+
 
     @ElementCollection
     @CollectionTable(name = "LIKED_POST_USER",joinColumns = @JoinColumn(name = "postId"))
