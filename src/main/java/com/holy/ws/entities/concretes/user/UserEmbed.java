@@ -27,14 +27,11 @@ public class UserEmbed {
     private String aboutUser;
 
     @Size(max = 5)
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "owner")
     private Set<Page> pagesOfUsers;
 
 
-    @OneToMany(targetEntity = Comment.class)
-    @JoinTable(name = "COMMENTS_OF_USER",
-    joinColumns = @JoinColumn(name = "USER_ID"),
-    inverseJoinColumns = @JoinColumn(name = "COMMENT_ID"))
+    @OneToMany(targetEntity = Comment.class,mappedBy = "authorOfComment")
     private List<Comment> comments;
 
     @ElementCollection
@@ -44,6 +41,8 @@ public class UserEmbed {
     @ElementCollection
     @CollectionTable(name = "USER_FRIEND_LIST",joinColumns = @JoinColumn(name = "USER_ID"))
     private Set<User> friendList;
+
+    private List<Page> followingPagesList;
 
     private Date createAccountDate = new Date();
 }

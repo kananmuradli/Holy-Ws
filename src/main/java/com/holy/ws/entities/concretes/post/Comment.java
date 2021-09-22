@@ -1,5 +1,7 @@
 package com.holy.ws.entities.concretes.post;
 
+import com.holy.ws.entities.concretes.pages.Page;
+import com.holy.ws.entities.concretes.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,4 +40,8 @@ public class Comment {
     @JoinColumn(name = "postId")
     private Post postOfComment;
 
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User authorOfComment;
+    
 }

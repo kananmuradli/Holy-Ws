@@ -19,7 +19,6 @@ public class PostEmbed {
     @OneToMany(mappedBy = "postOfComment")
     private List<Comment> comments;
 
-
     @ElementCollection
     @CollectionTable(name = "LIKED_POST_USER",joinColumns = @JoinColumn(name = "postId"))
     private Set<User> likedPostUserList;

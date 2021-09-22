@@ -67,9 +67,9 @@ public class Page implements Occupant {
         return 0;
     }
 
-//    @Embedded
-//    @AttributeOverrides({
-//    })
-//    private PageEmbed pageEmbed;
+    @Embedded
+    @AttributeOverrides({
+    })
+    private PageEmbed pageEmbed;
 
 }
