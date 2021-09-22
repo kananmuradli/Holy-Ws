@@ -2,6 +2,7 @@ package com.holy.ws.entities.concretes.utilities;
 
 
 import com.holy.ws.entities.abstracts.Occupant;
+import com.holy.ws.entities.concretes.pages.Page;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ADDRESSES")
 public class Address implements Comparable<Address> {
 
     @Id
@@ -38,6 +38,9 @@ public class Address implements Comparable<Address> {
     @Column(name = "POSTAL_CODE")
     private String postalCode;
 
+    @ManyToOne
+    @JoinColumn(name = "pageId")
+    private Page page;
 
     @Override
     public boolean equals(Object o) {

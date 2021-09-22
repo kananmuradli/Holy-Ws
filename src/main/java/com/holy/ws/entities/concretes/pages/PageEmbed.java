@@ -11,15 +11,11 @@ import java.util.List;
 /**
  * @author Vugar Mammadli
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Embeddable
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Embeddable
 public class PageEmbed {
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST})
-    @JoinTable(name = "PAGE_COMMENTS",joinColumns = @JoinColumn(name = "PAGE_ID"),
-    inverseJoinColumns = @JoinColumn(name = "COMMENT_ID"))
-    private List<Comment> comments;
 
 }

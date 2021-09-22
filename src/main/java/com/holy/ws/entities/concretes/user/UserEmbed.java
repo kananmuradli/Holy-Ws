@@ -19,9 +19,7 @@ import java.util.Set;
  * @author Vugar Mammadli
  */
 @Embeddable
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor
 public class UserEmbed {
 
     @Nullable
@@ -34,11 +32,6 @@ public class UserEmbed {
     @Length(max = 5)
     private Set<Page> pagesOfUsers;
 
-    @Nullable
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(name = "C_POSTS", joinColumns = { @JoinColumn(name = "authorId")})
-    private List<Post> posts;
-
 
     @Nullable
     @OneToMany(targetEntity = Comment.class)
@@ -49,8 +42,13 @@ public class UserEmbed {
 
     @Nullable
     @ElementCollection
-    @CollectionTable(name = "User_FriendList",joinColumns = @JoinColumn(name = "User_Id"))
+    @CollectionTable(name = "USER_NUMBER_LIST",joinColumns = @JoinColumn(name = "USER_ID"))
     private Set<String> phoneNumber;
+
+    @Nullable
+    @ElementCollection
+    @CollectionTable(name = "USER_FRIEND_LIST",joinColumns = @JoinColumn(name = "USER_ID"))
+    private Set<User> friendList;
 
     @NotNull
     private Date createAccountDate = new Date();

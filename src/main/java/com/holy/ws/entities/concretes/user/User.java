@@ -20,8 +20,7 @@ import java.util.Set;
  * @author Vugar Mammadli
  */
 @Data @NoArgsConstructor @AllArgsConstructor
-@Entity
-@Table(name = "Users")
+@Entity @Table(name = "USERS")
 public class User implements Occupant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,7 +42,7 @@ public class User implements Occupant {
     @Column(name = "PASSWORD")
     @Length(min = 6)
     @NotNull
-    @NotEmpty
+    @NotEmpty(message = "Must Not Empty")
     private String password;
 
     @Column(name = "USER_PROFILAVATAR")
@@ -56,8 +55,10 @@ public class User implements Occupant {
 
 
     @Size(max = 2,message = "Max 2")
-    @Column(name = "ADDRESSES")
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "USER_ADDRESS",
+    joinColumns = @JoinColumn(name = "USER_ID"),
+    inverseJoinColumns = @JoinColumn(name = "ADDRESS_ID"))
     private Set<Address> addresses;
 
     @Column(name = "USER_EMAILS")
@@ -66,7 +67,7 @@ public class User implements Occupant {
     @CollectionTable(name = "EMAILS",joinColumns = @JoinColumn(name = "User_ID"))
     private Set<String> emails;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "PHONE_NUMBERS",joinColumns = @JoinColumn(name = "USER_ID"),
     inverseJoinColumns = @JoinColumn(name = "PHONE_NUMBER_ID"))
     private Set<PhoneNumber> phoneNumbers;
@@ -78,19 +79,6 @@ public class User implements Occupant {
     })
     private UserEmbed userEmbed;
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return getUserId() == user.getUserId() && getName().equals(user.getName()) && getLastName().equals(user.getLastName()) && getUsername().equals(user.getUsername()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getAvatar(), user.getAvatar()) && getBirthOfDate().equals(user.getBirthOfDate()) && Objects.equals(getAddresses(), user.getAddresses()) && getEmails().equals(user.getEmails()) && getPhoneNumbers().equals(user.getPhoneNumbers()) && Objects.equals(getUserEmbed(), user.getUserEmbed());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getUserId(), getName(), getLastName(), getUsername(), getPassword(), getAvatar(), getBirthOfDate(), getAddresses(), getEmails(), getPhoneNumbers(), getUserEmbed());
-    }
 
     @NotNull
     @Override

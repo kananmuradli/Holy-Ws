@@ -7,6 +7,7 @@ import com.holy.ws.entities.concretes.utilities.PhoneNumber;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -26,17 +27,17 @@ import java.util.Set;
 @Table(name = "pageOfUsers")
 public class Page implements Occupant {
     @Id
-    @Column(name = "Page_Id")
+    @Column(name = "PAGE_ID")
     private long pageId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "User_Id")
     @NotNull
+    @ManyToOne
+    @JoinColumn(name = "userId")
     private User owner;
 
     @Column(name = "PAGE_NAME")
     @NotNull
-    @Size(min = 5,max = 50)
+    @Length(min = 5,max = 50)
     private String pageName;
 
     @Column(name = "PAGE_AVATAR")
@@ -53,26 +54,26 @@ public class Page implements Occupant {
     private Date createDate;
 
     @Size(max = 2,message = "Max 2")
-    @Column(name = "ADDRESSES")
-    @OneToMany
+    @OneToMany(mappedBy = "page")
     private Set<Address> addresses;
 
 
     @Column(name = "PHONE_NUMBERS",length = 14)
     @Size(min = 1,max = 3)
-    @OneToMany
+    @OneToMany(targetEntity = PhoneNumber.class)
+    @JoinTable(name = "PAGES_PHONE_NUMBER",joinColumns = @JoinColumn(name = "PAGE_ID"),
+    inverseJoinColumns = @JoinColumn(name = "PHONE_NUMBER_ID"))
     private Set<PhoneNumber> phoneNumbers;
 
 
-    @Embedded
-    @AttributeOverrides({
-
-    })
-    private PageEmbed pageEmbed;
-
-    @NotNull
     @Override
     public int compareTo(Occupant o) {
         return 0;
     }
+
+//    @Embedded
+//    @AttributeOverrides({
+//    })
+//    private PageEmbed pageEmbed;
+
 }

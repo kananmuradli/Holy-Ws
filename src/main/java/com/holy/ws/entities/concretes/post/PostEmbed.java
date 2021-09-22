@@ -17,7 +17,6 @@ import java.util.Set;
 @Embeddable
 public class PostEmbed {
 
-
     @ElementCollection
     @CollectionTable(name = "LIKED_POST_USER",joinColumns = @JoinColumn(name = "postId"))
     private Set<User> likedPostUserList;

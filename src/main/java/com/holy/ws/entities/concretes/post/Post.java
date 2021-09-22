@@ -5,28 +5,20 @@ import com.holy.ws.entities.concretes.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-/**
- * @author Vugar Mammadli
- */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
+@Data @AllArgsConstructor @NoArgsConstructor
 @Entity
-@Table(name = "C_POSTS")
+@Table(name = "POSTS")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long postId;
-
-    @Column(name = "AUTHOR")
-    @NotNull
-    private User authorId;
+    private int postId;
 
     @Column(name = "CONTEXT_TEXT")
     @NotNull
@@ -40,15 +32,11 @@ public class Post {
     @Column(name = "SOUND_FIELD")
     private String sound;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "POSTS_COMMENTS",
-            joinColumns = @JoinColumn(name = "USER_ID"),
-            inverseJoinColumns = @JoinColumn(name = "COMMENT_ID"))
-    private List<Comment> comments;
+
 
 
     @Transient
-    private int countComments = getCount(comments);
+    private int countComments = getCount(new ArrayList<>());
     private int getCount(List<Comment> list){
         if(!(list==null)) return list.size();
         else return 0;
@@ -59,5 +47,4 @@ public class Post {
     @AttributeOverrides({
     })
     private PostEmbed postEmbed;
-
 }
