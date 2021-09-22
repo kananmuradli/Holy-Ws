@@ -1,4 +1,9 @@
 package com.holy.ws.entities.abstracts;
 
-public interface Occupant {
+
+/**
+ * @author Vugar Mammadli
+ */
+public interface Occupant extends Comparable<Occupant>{
+
 }

@@ -14,6 +14,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+
+/**
+ * @author Vugar Mammadli
+ */
 @Embeddable
 @Data
 @NoArgsConstructor
@@ -37,8 +41,10 @@ public class UserEmbed {
 
 
     @Nullable
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "COMMENTS_OF_USER",joinColumns = @JoinColumn(name = "commentAuthorId") )
+    @OneToMany(targetEntity = Comment.class)
+    @JoinTable(name = "COMMENTS_OF_USER",
+    joinColumns = @JoinColumn(name = "USER_ID"),
+    inverseJoinColumns = @JoinColumn(name = "COMMENT_ID"))
     private List<Comment> comments;
 
     @Nullable

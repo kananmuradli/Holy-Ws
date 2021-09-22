@@ -1,5 +1,6 @@
 package com.holy.ws.entities.concretes.post;
 
+import com.holy.ws.entities.abstracts.Occupant;
 import com.holy.ws.entities.concretes.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,19 +11,20 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
-
+/**
+ * @author Vugar Mammadli
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Comment {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentId;
 
     private String commentContext;
-
-    private User commentAuthorId;
-
-    private Set<User> likedCommentUserList;
 
     @Temporal(TemporalType.TIMESTAMP)
     private final Date commentCreateDate = new Date();
@@ -33,16 +35,4 @@ public class Comment {
     private boolean wasUpdateComment;
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Comment)) return false;
-        Comment comment = (Comment) o;
-        return getCommentId() == comment.getCommentId() && isWasUpdateComment() == comment.isWasUpdateComment() && getCommentContext().equals(comment.getCommentContext()) && getCommentAuthorId().equals(comment.getCommentAuthorId()) && Objects.equals(getLikedCommentUserList(), comment.getLikedCommentUserList()) && getCommentCreateDate().equals(comment.getCommentCreateDate()) && Objects.equals(getCommentUpdateDate(), comment.getCommentUpdateDate());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getCommentId(), getCommentContext(), getCommentAuthorId(), getLikedCommentUserList(), getCommentCreateDate(), getCommentUpdateDate(), isWasUpdateComment());
-    }
 }

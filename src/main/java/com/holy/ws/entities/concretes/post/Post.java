@@ -11,7 +11,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
-
+/**
+ * @author Vugar Mammadli
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,22 +37,23 @@ public class Post {
     @CollectionTable(name = "TAGS",joinColumns = @JoinColumn(name = "postId"))
     private Set<User> tags;
 
-
     @Column(name = "SOUND_FIELD")
     private String sound;
 
-    @ElementCollection
-    @CollectionTable(name = "COMMENTS",joinColumns = @JoinColumn(name = "postId"))
-    @Column(name = "COMMENTS")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "POSTS_COMMENTS",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "COMMENT_ID"))
     private List<Comment> comments;
 
-    @Column(name = "COUNT_COMMENTS")
-    private int countComments = getCount(comments);
 
+    @Transient
+    private int countComments = getCount(comments);
     private int getCount(List<Comment> list){
         if(!(list==null)) return list.size();
         else return 0;
     }
+
 
     @Embedded
     @AttributeOverrides({

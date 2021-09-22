@@ -14,6 +14,11 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.Set;
 
+
+/**
+ * @author Vugar Mammadli
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -54,8 +59,20 @@ public class Page implements Occupant {
 
 
     @Column(name = "PHONE_NUMBERS",length = 14)
-    @Size(min = 1,max = 2)
+    @Size(min = 1,max = 3)
     @OneToMany
     private Set<PhoneNumber> phoneNumbers;
 
+
+    @Embedded
+    @AttributeOverrides({
+
+    })
+    private PageEmbed pageEmbed;
+
+    @NotNull
+    @Override
+    public int compareTo(Occupant o) {
+        return 0;
+    }
 }

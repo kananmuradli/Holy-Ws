@@ -3,7 +3,6 @@ package com.holy.ws.entities.concretes.user;
 import com.holy.ws.entities.abstracts.Occupant;
 import com.holy.ws.entities.concretes.utilities.Address;
 import com.holy.ws.entities.concretes.utilities.PhoneNumber;
-import com.holy.ws.entities.concretes.utilities.PhoneNumberType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,10 +13,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
-
+/**
+ * @author Vugar Mammadli
+ */
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "Users")
@@ -65,9 +66,9 @@ public class User implements Occupant {
     @CollectionTable(name = "EMAILS",joinColumns = @JoinColumn(name = "User_ID"))
     private Set<String> emails;
 
-    @Column(name = "PHONE_NUMBERS",length = 14)
-    @Size(min = 1,max = 2)
     @OneToMany
+    @JoinTable(name = "PHONE_NUMBERS",joinColumns = @JoinColumn(name = "USER_ID"),
+    inverseJoinColumns = @JoinColumn(name = "PHONE_NUMBER_ID"))
     private Set<PhoneNumber> phoneNumbers;
 
 
@@ -78,4 +79,22 @@ public class User implements Occupant {
     private UserEmbed userEmbed;
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getUserId() == user.getUserId() && getName().equals(user.getName()) && getLastName().equals(user.getLastName()) && getUsername().equals(user.getUsername()) && Objects.equals(getPassword(), user.getPassword()) && Objects.equals(getAvatar(), user.getAvatar()) && getBirthOfDate().equals(user.getBirthOfDate()) && Objects.equals(getAddresses(), user.getAddresses()) && getEmails().equals(user.getEmails()) && getPhoneNumbers().equals(user.getPhoneNumbers()) && Objects.equals(getUserEmbed(), user.getUserEmbed());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUserId(), getName(), getLastName(), getUsername(), getPassword(), getAvatar(), getBirthOfDate(), getAddresses(), getEmails(), getPhoneNumbers(), getUserEmbed());
+    }
+
+    @NotNull
+    @Override
+    public int compareTo(Occupant o) {
+        return 0;
+    }
 }
