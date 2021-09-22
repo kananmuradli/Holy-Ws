@@ -1,7 +1,7 @@
 package com.holy.ws.entities.concretes.user;
 
 
-import com.holy.ws.entities.concretes.pages.PagesOfUsers;
+import com.holy.ws.entities.concretes.pages.Page;
 import com.holy.ws.entities.concretes.post.Comment;
 import com.holy.ws.entities.concretes.post.Post;
 import lombok.*;
@@ -11,7 +11,6 @@ import org.springframework.lang.Nullable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +28,7 @@ public class UserEmbed {
     @JoinColumn(name = "owner")
     @OneToMany(fetch = FetchType.LAZY)
     @Length(max = 5)
-    private Set<PagesOfUsers> pagesOfUsers;
+    private Set<Page> pagesOfUsers;
 
     @Nullable
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
@@ -38,7 +37,7 @@ public class UserEmbed {
 
 
     @Nullable
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "COMMENTS_OF_USER",joinColumns = @JoinColumn(name = "commentAuthorId") )
     private List<Comment> comments;
 

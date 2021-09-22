@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -14,6 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
+
+    private long commentId;
 
     private String commentContext;
 
@@ -28,4 +31,18 @@ public class Comment {
     private Date commentUpdateDate;
 
     private boolean wasUpdateComment;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Comment)) return false;
+        Comment comment = (Comment) o;
+        return getCommentId() == comment.getCommentId() && isWasUpdateComment() == comment.isWasUpdateComment() && getCommentContext().equals(comment.getCommentContext()) && getCommentAuthorId().equals(comment.getCommentAuthorId()) && Objects.equals(getLikedCommentUserList(), comment.getLikedCommentUserList()) && getCommentCreateDate().equals(comment.getCommentCreateDate()) && Objects.equals(getCommentUpdateDate(), comment.getCommentUpdateDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCommentId(), getCommentContext(), getCommentAuthorId(), getLikedCommentUserList(), getCommentCreateDate(), getCommentUpdateDate(), isWasUpdateComment());
+    }
 }

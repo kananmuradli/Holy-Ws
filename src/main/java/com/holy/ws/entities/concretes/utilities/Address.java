@@ -1,24 +1,39 @@
-package com.holy.ws.entities.concretes.user.other;
+package com.holy.ws.entities.concretes.utilities;
 
 
+import com.holy.ws.entities.abstracts.Occupant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.Objects;
 
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
+@Entity
+@Table(name = "ADDRESSES")
+public class Address implements Comparable<Address> {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long addressId;
+
+    @Column(name = "OCCUPANT")
+    private Occupant occupant;
+
+    @Column(name = "COUNTRY")
     private String country;
 
+    @Column(name = "CITY")
     private String city;
 
+    @Column(name = "STREET")
     private String street;
 
+    @Column(name = "POSTAL_CODE")
     private String postalCode;
 
 
@@ -33,5 +48,10 @@ public class Address {
     @Override
     public int hashCode() {
         return Objects.hash( getCountry(), getCity(), getStreet(), getPostalCode());
+    }
+
+    @Override
+    public int compareTo(Address o) {
+        return Integer.compare(o.country.length(), this.country.length());
     }
 }
