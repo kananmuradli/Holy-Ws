@@ -1,7 +1,7 @@
 package com.holy.ws.entities.concretes.utilities;
 
 
-import com.holy.ws.entities.concretes.pages.Page;
+import com.holy.ws.entities.concretes.page.Page;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
