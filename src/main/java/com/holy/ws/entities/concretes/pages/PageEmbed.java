@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
+
 /**
  * @author Vugar Mammadli
  */
@@ -17,6 +19,11 @@ import java.util.List;
 @Embeddable
 public class PageEmbed {
 
-    private List<User> followersList;
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            targetEntity = User.class
+    )
+    private Set<User> followersList;
 
 }

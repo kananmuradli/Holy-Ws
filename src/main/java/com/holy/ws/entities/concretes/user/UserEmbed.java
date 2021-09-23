@@ -20,7 +20,9 @@ import java.util.Set;
  * @author Vugar Mammadli
  */
 @Embeddable
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEmbed {
 
     @Lob
@@ -42,7 +44,15 @@ public class UserEmbed {
     @CollectionTable(name = "USER_FRIEND_LIST",joinColumns = @JoinColumn(name = "USER_ID"))
     private Set<User> friendList;
 
-    private List<Page> followingPagesList;
+
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            targetEntity = Page.class
+    )
+    private Set<Page> followingPagesList;
+
+
 
     private Date createAccountDate = new Date();
 }

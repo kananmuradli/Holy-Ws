@@ -22,8 +22,9 @@ import java.util.Set;
 @Data @NoArgsConstructor @AllArgsConstructor
 @Entity @Table(name = "USERS")
 public class User implements Occupant {
+    @SequenceGenerator(name = "sequenceUser",sequenceName = "SEQUENCE_USER",allocationSize = 1,initialValue = 100)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "sequenceUser")
     @Column(name = "USER_ID",nullable = false,updatable = false)
     private int userId;
 
@@ -75,7 +76,7 @@ public class User implements Occupant {
 
     @Embedded
     private UserEmbed userEmbed;
-    
+
 
     @Override
     public int compareTo(Occupant o) {
