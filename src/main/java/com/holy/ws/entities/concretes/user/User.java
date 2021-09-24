@@ -33,8 +33,8 @@ public class User implements Comparable<User>{
     @Length(min = 8,max = 35)
     private String email;
 
-    @OneToOne(mappedBy = "ownerProfile")
-    private ProfileUser profileUserOfUser;
+    @OneToOne(mappedBy = "ownerProfile",cascade = CascadeType.ALL)
+    private ProfileUser profileOfUser;
 
     @Temporal(TemporalType.TIMESTAMP)
     private final Date dateOfCreate = new Date();
@@ -47,7 +47,6 @@ public class User implements Comparable<User>{
         this.username = username;
         this.password = password;
         this.email = email;
-        this.profileUserOfUser = new ProfileUser();
     }
 
     public long getUserid() {
@@ -97,11 +96,11 @@ public class User implements Comparable<User>{
     }
 
     public ProfileUser getProfileOfUser() {
-        return profileUserOfUser;
+        return profileOfUser;
     }
 
     public void setProfileOfUser(ProfileUser profileUserOfUser) {
-        this.profileUserOfUser = profileUserOfUser;
+        this.profileOfUser = profileUserOfUser;
     }
 
     @Override

@@ -11,13 +11,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "PROFIL_OF_USER")
-@Lazy
 public class ProfileUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @OneToOne
+    @JoinColumn(name = "userId")
     private User ownerProfile;
 
     @Lob
