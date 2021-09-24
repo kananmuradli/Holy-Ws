@@ -1,6 +1,8 @@
 package com.holy.ws.business.concretes;
 
 import com.holy.ws.business.abstracts.UserService;
+import com.holy.ws.core.concretes.utilities.result.Result;
+import com.holy.ws.core.concretes.utilities.result.success.SuccessResult;
 import com.holy.ws.dataAccess.abstracts.user.UserCrudRepository;
 import com.holy.ws.entities.concretes.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,9 @@ public class UserManager implements UserService {
     }
 
 
-    User save(User user){
+    public Result save(User user){
         userCrudRepository.save(user);
-        return user;
+        return new SuccessResult("The User saved on Database");
     }
 
 }

@@ -11,7 +11,4 @@ import java.util.Optional;
 @Repository
 public interface UserCrudRepository extends CrudRepository<User, Long> {
 
-
-
-
 }
